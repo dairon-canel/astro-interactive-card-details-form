@@ -12,35 +12,37 @@ const isValidCardNumber = (cardNumber: string) => {
 
 if (Astro.request.method === 'POST') {
   try {
-    const data = await Astro.request.formData();
-    const ownerName = data.get('ownerName');
+    /* const ownerName = data.get('ownerName');
     const cardNumber = data.get('cardNumber');
     const expDateM = data.get('expDateM');
     const expDateY = data.get('expDateY');
     const cvcNumber = data.get('cvcNumber');
 
-    console.log(ownerName);
-    console.log(cardNumber);
-    console.log(expDateM);
-    console.log(expDateY);
-    console.log(cvcNumber);
-
-    /* if (typeof ownerName !== 'string' || ownerName.length < 1) {
+    if (typeof ownerName !== 'string' || ownerName.length < 1) {
       errors.ownerName += 'Please enter a card holder name. ';
     }
     if (typeof cardNumber !== 'string' || !isValidCardNumber(cardNumber)) {
       errors.cardNumber += 'Card number is not valid. ';
     }
-    if (typeof expDateM !== 'string' || expDateM.length < 6) {
+    if (typeof expDateM !== 'string') {
       errors.expDate += 'Password must be at least 6 characters. ';
     }
-    if (typeof expDateY !== 'string' || expDateY.length < 6) {
+    if (typeof expDateY !== 'string') {
       errors.expDate += 'Password must be at least 6 characters. ';
     }
-    if (typeof cvcNumber !== 'string' || cvcNumber.length < 6) {
+    if (typeof cvcNumber !== 'string') {
       errors.cvcNumber += 'Password must be at least 6 characters. ';
     }
-    if (!Object.keys(errors).length) {
+    if (!Object.values(errors).some(e => e !== '')) {
+      console.log('post');
+      Astro.cookies.set('cardData', {
+        ownerName,
+        cardNumber,
+        expDateM,
+        expDateY,
+        cvcNumber,
+      });
+      console.log('serverrrr');
       return Astro.redirect('/success');
     } */
   } catch (error) {
@@ -52,7 +54,7 @@ if (Astro.request.method === 'POST') {
 ---
 
 <section class="form_section">
-  <form method="POST">
+  <form action="/cardData" method="POST">
     <div>
       <label>
         Cardholder Name
