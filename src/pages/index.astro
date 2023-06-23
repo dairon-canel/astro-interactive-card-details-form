@@ -5,13 +5,11 @@ import Form from '../components/Form.astro';
 ---
 
 <Layout title="Frontend Mentor | Interactive card details form">
-  <main>
-    <section class="card_section">
-      <Card display="back" align="end" style={{ marginBottom: '-60px' }} />
-      <Card display="front" align="start" />
-    </section>
-    <Form />
-  </main>
+  <section class="card_section">
+    <Card display="back" align="end" style={{ marginBottom: '-60px' }} />
+    <Card display="front" align="start" />
+  </section>
+  <Form />
 </Layout>
 
 <script>
@@ -180,16 +178,6 @@ import Form from '../components/Form.astro';
 </script>
 
 <style>
-  main {
-    min-height: 100vh;
-    background-image: url('bg-main-mobile.png');
-    background-repeat: no-repeat;
-    background-color: white;
-    padding-top: 32px;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
   .card_section {
     display: flex;
     flex-direction: column;

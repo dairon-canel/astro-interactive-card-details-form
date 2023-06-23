@@ -23,11 +23,12 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <main>
+      <slot />
+    </main>
   </body>
 </html>
 <style is:global>
-
   /* css reset from https://www.joshwcomeau.com/css/custom-css-reset/ */
 
   /*
@@ -105,5 +106,15 @@ const { title } = Astro.props;
     background-color: #f6f6f6;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.125rem;
+  }
+
+  main {
+    min-height: 100vh;
+    background-image: url('bg-main-mobile.png');
+    background-repeat: no-repeat;
+    background-color: white;
+    padding-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 </style>
