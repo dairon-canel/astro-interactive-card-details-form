@@ -103,7 +103,13 @@ if (Astro.request.method === 'POST') {
     <div>
       <label>
         CVC
-        <input type="number" placeholder="e.g. 123" name="cvcNumber" required />
+        <input
+          type="number"
+          placeholder="e.g. 123"
+          id="cvcNumber"
+          name="cvcNumber"
+          required
+        />
       </label>
       {errors.cvcNumber && <p>{errors.cvcNumber}</p>}
     </div>

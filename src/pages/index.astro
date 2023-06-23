@@ -18,6 +18,7 @@ import Form from '../components/Form.astro';
   const cardNumberInputField = document.getElementById('cardNumber');
   const expDateMInputField = document.getElementById('expDateM');
   const expDateYInputField = document.getElementById('expDateY');
+  const cvcNumberInputField = document.getElementById('cvcNumber');
 
   if (cardNumberInputField) {
     cardNumberInputField.addEventListener('input', validateAndUpdateCardNumber);
@@ -27,6 +28,9 @@ import Form from '../components/Form.astro';
   }
   if (expDateYInputField) {
     expDateYInputField.addEventListener('input', validateAndUpdateExpDateY);
+  }
+  if (cvcNumberInputField) {
+    cvcNumberInputField.addEventListener('input', validateAndUpdateCvcNumber);
   }
 
   function validateAndUpdateCardNumber() {
@@ -124,6 +128,26 @@ import Form from '../components/Form.astro';
     }
 
     (expDateYOutput as HTMLSpanElement).textContent = expDateYPaddedValue;
+  }
+
+  function validateAndUpdateCvcNumber() {
+    const cvcNumberOutput = document.getElementById('cvcNumberOutput');
+
+    const cvcNumberInputValue = (cvcNumberInputField as HTMLInputElement).value;
+
+    // Remove any non-digit characters from the input value
+    const cvcNumberFormattedValue = cvcNumberInputValue.replace(/\De/g, '');
+
+    // Pad the formatted value with zeros to make it 2 characters long
+    let cvcNumberPaddedValue = cvcNumberFormattedValue.padStart(3, '0');
+
+    if (cvcNumberInputValue.length > 3) {
+      (cvcNumberInputField as HTMLInputElement).value =
+        cvcNumberInputValue.substring(0, 3);
+      return;
+    }
+
+    (cvcNumberOutput as HTMLSpanElement).textContent = cvcNumberPaddedValue;
   }
 </script>
 

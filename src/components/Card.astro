@@ -34,7 +34,13 @@ const { display, align, style } = Astro.props;
       </>
     )
   }
-  {display === 'back' && <div class="card_back__cvc_number">000</div>}
+  {
+    display === 'back' && (
+      <div class="card_back__cvc_number" id="cvcNumberOutput">
+        000
+      </div>
+    )
+  }
 </div>
 
 <style>
