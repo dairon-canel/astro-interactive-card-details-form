@@ -22,15 +22,26 @@ import Form from '../components/Form.astro';
 
   if (cardNumberInputField) {
     cardNumberInputField.addEventListener('input', validateAndUpdateCardNumber);
+    cardNumberInputField.addEventListener('keydown', preventLetterE);
   }
   if (expDateMInputField) {
     expDateMInputField.addEventListener('input', validateAndUpdateExpDateM);
+    expDateMInputField.addEventListener('keydown', preventLetterE);
   }
   if (expDateYInputField) {
     expDateYInputField.addEventListener('input', validateAndUpdateExpDateY);
+    expDateYInputField.addEventListener('keydown', preventLetterE);
   }
   if (cvcNumberInputField) {
     cvcNumberInputField.addEventListener('input', validateAndUpdateCvcNumber);
+    cvcNumberInputField.addEventListener('keydown', preventLetterE);
+  }
+
+  function preventLetterE(event: KeyboardEvent) {
+    // Prevent default behavior if the pressed key is "e"
+    if (event.key === 'e') {
+      event.preventDefault();
+    }
   }
 
   function validateAndUpdateCardNumber() {
