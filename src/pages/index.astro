@@ -6,16 +6,61 @@ import Form from '../components/Form.astro';
 
 <Layout title="Frontend Mentor | Interactive card details form">
   <main>
-    <section>
-      <Card display="front" />
-      <Card display="back" />
+    <section class="card_section">
+      <Card display="back" align="end" style={{ marginBottom: '-60px' }} />
+      <Card display="front" align="start" />
     </section>
     <Form />
   </main>
 </Layout>
 
+<script is:inline>
+  const inputField = document.getElementById('cardNumber');
+
+  if (inputField) {
+    inputField.addEventListener('input', validateAndUpdateDiv);
+  }
+
+  function validateAndUpdateDiv() {
+    const outputDiv = document.getElementById('outputDiv');
+
+    const inputValue = inputField.value;
+
+    // Remove any non-digit characters from the input value
+    const formattedValue = inputValue.replace(/\D/g, '');
+
+    // Pad the formatted value with zeros to make it 16 characters long
+    const paddedValue = formattedValue.padEnd(16, '0');
+
+    // Add a space every four characters
+    const formattedOutput = paddedValue.replace(/(.{4})/g, '$1 ');
+
+    if (inputValue.length > 16) {
+      inputField.value = inputValue.substring(0, 16);
+      return;
+    }
+    outputDiv.textContent = formattedOutput;
+  }
+</script>
+
 <style>
   main {
-    background-color: aqua;
+    min-height: 100vh;
+    background-image: url('bg-main-mobile.png');
+    background-repeat: no-repeat;
+    background-color: white;
+    padding-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .card_section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form_section {
+    background-color: chocolate;
+    margin-top: 40px;
   }
 </style>

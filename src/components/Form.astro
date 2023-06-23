@@ -1,4 +1,45 @@
 ---
 ---
 
-<div>Form</div>
+<section class="form_section">
+  <form>
+    <div>
+      <label>
+        Cardholder Name
+        <input
+          type="text"
+          name="ownerName"
+          placeholder="e.g. Jane Appleseed"
+          required
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Card Number
+        <input
+          id="cardNumber"
+          type="number"
+          name="cardNumber"
+          placeholder="e.g. 1234 5678 9123 0000"
+          required
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Exp. Date (MM/YY)
+        <input type="number" placeholder="MM" name="expDateM" required />
+        <input type="number" placeholder="YY" name="expDateY" required />
+      </label>
+    </div>
+    <div>
+      <label>
+        CVC
+        <input type="number" placeholder="e.g. 123" name="cvcNumber" required />
+      </label>
+    </div>
+
+    <button type="submit">Confirm</button>
+  </form>
+</section>
