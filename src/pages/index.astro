@@ -15,31 +15,37 @@ import Form from '../components/Form.astro';
 </Layout>
 
 <script>
-  const inputField = document.getElementById('cardNumber');
+  const cardNumberInputField = document.getElementById('cardNumber');
 
-  if (inputField) {
-    inputField.addEventListener('input', validateAndUpdateDiv);
+  if (cardNumberInputField) {
+    cardNumberInputField.addEventListener('input', validateAndUpdateCardNumber);
   }
 
-  function validateAndUpdateDiv() {
-    const outputDiv = document.getElementById('outputDiv');
+  function validateAndUpdateCardNumber() {
+    const cardNumberOutput = document.getElementById('cardNumberOutput');
 
-    const inputValue = (inputField as HTMLInputElement).value;
+    const cardNumberInputValue = (cardNumberInputField as HTMLInputElement)
+      .value;
 
     // Remove any non-digit characters from the input value
-    const formattedValue = inputValue.replace(/\D/g, '');
+    const cardNumberFormattedValue = cardNumberInputValue.replace(/\D/g, '');
 
     // Pad the formatted value with zeros to make it 16 characters long
-    const paddedValue = formattedValue.padEnd(16, '0');
+    const cardNumberPaddedValue = cardNumberFormattedValue.padEnd(16, '0');
 
     // Add a space every four characters
-    const formattedOutput = paddedValue.replace(/(.{4})/g, '$1 ');
+    const cardNumberFormattedOutput = cardNumberPaddedValue.replace(
+      /(.{4})/g,
+      '$1 ',
+    );
 
-    if (inputValue.length > 16) {
-      (inputField as HTMLInputElement).value = inputValue.substring(0, 16);
+    if (cardNumberInputValue.length > 16) {
+      (cardNumberInputField as HTMLInputElement).value =
+        cardNumberInputValue.substring(0, 16);
       return;
     }
-    (outputDiv as HTMLDivElement).textContent = formattedOutput;
+    (cardNumberOutput as HTMLDivElement).textContent =
+      cardNumberFormattedOutput;
   }
 </script>
 
