@@ -16,9 +16,17 @@ import Form from '../components/Form.astro';
 
 <script>
   const cardNumberInputField = document.getElementById('cardNumber');
+  const expDateMInputField = document.getElementById('expDateM');
+  const expDateYInputField = document.getElementById('expDateY');
 
   if (cardNumberInputField) {
     cardNumberInputField.addEventListener('input', validateAndUpdateCardNumber);
+  }
+  if (expDateMInputField) {
+    expDateMInputField.addEventListener('input', validateAndUpdateExpDateM);
+  }
+  if (expDateYInputField) {
+    expDateYInputField.addEventListener('input', validateAndUpdateExpDateY);
   }
 
   function validateAndUpdateCardNumber() {
@@ -28,7 +36,7 @@ import Form from '../components/Form.astro';
       .value;
 
     // Remove any non-digit characters from the input value
-    const cardNumberFormattedValue = cardNumberInputValue.replace(/\D/g, '');
+    const cardNumberFormattedValue = cardNumberInputValue.replace(/\De/g, '');
 
     // Pad the formatted value with zeros to make it 16 characters long
     const cardNumberPaddedValue = cardNumberFormattedValue.padEnd(16, '0');
@@ -46,6 +54,76 @@ import Form from '../components/Form.astro';
     }
     (cardNumberOutput as HTMLDivElement).textContent =
       cardNumberFormattedOutput;
+  }
+
+  function validateAndUpdateExpDateM() {
+    const expDateMOutput = document.getElementById('expDateMOutput');
+
+    const expDateMInputValue = (expDateMInputField as HTMLInputElement).value;
+
+    // Remove any non-digit characters from the input value
+    const expDateMFormattedValue = expDateMInputValue.replace(/\De/g, '');
+
+    // Pad the formatted value with zeros to make it 2 characters long
+    let expDateMPaddedValue = expDateMFormattedValue.padStart(2, '0');
+
+    if (expDateMInputValue == '012') {
+      (expDateMInputField as HTMLInputElement).value = '12';
+      (expDateMOutput as HTMLSpanElement).textContent = '12';
+      return;
+    }
+    if (expDateMInputValue == '011') {
+      (expDateMInputField as HTMLInputElement).value = '11';
+      (expDateMOutput as HTMLSpanElement).textContent = '11';
+      return;
+    }
+    if (expDateMInputValue == '010') {
+      (expDateMInputField as HTMLInputElement).value = '10';
+      (expDateMOutput as HTMLSpanElement).textContent = '10';
+      return;
+    }
+
+    if (
+      expDateMInputValue === '1' ||
+      expDateMInputValue === '2' ||
+      expDateMInputValue === '3' ||
+      expDateMInputValue === '4' ||
+      expDateMInputValue === '5' ||
+      expDateMInputValue === '6' ||
+      expDateMInputValue === '7' ||
+      expDateMInputValue === '8' ||
+      expDateMInputValue === '9'
+    ) {
+      (expDateMInputField as HTMLInputElement).value =
+        expDateMFormattedValue.padStart(2, '0');
+    }
+    if (expDateMInputValue.length > 2) {
+      (expDateMInputField as HTMLInputElement).value =
+        expDateMInputValue.substring(0, 2);
+      return;
+    }
+
+    (expDateMOutput as HTMLSpanElement).textContent = expDateMPaddedValue;
+  }
+
+  function validateAndUpdateExpDateY() {
+    const expDateYOutput = document.getElementById('expDateYOutput');
+
+    const expDateYInputValue = (expDateYInputField as HTMLInputElement).value;
+
+    // Remove any non-digit characters from the input value
+    const expDateYFormattedValue = expDateYInputValue.replace(/\De/g, '');
+
+    // Pad the formatted value with zeros to make it 2 characters long
+    let expDateYPaddedValue = expDateYFormattedValue.padStart(2, '0');
+
+    if (expDateYInputValue.length > 2) {
+      (expDateYInputField as HTMLInputElement).value =
+        expDateYInputValue.substring(0, 2);
+      return;
+    }
+
+    (expDateYOutput as HTMLSpanElement).textContent = expDateYPaddedValue;
   }
 </script>
 

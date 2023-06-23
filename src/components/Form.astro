@@ -83,8 +83,20 @@ if (Astro.request.method === 'POST') {
     <div>
       <label>
         Exp. Date (MM/YY)
-        <input type="number" placeholder="MM" name="expDateM" required />
-        <input type="number" placeholder="YY" name="expDateY" required />
+        <input
+          type="number"
+          placeholder="MM"
+          name="expDateM"
+          id="expDateM"
+          required
+        />
+        <input
+          type="number"
+          placeholder="YY"
+          name="expDateY"
+          id="expDateY"
+          required
+        />
       </label>
       {errors.expDate && <p>{errors.expDate}</p>}
     </div>

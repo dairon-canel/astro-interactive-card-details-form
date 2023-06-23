@@ -26,7 +26,11 @@ const { display, align, style } = Astro.props;
           0000 0000 0000 0000
         </div>
         <div class="card_front__owner">Jane Appleseed</div>
-        <div class="card_front__date">00/00</div>
+        <div class="card_front__date">
+          <span id="expDateMOutput">00</span>
+          <span style="margin-left: -2px; margin-right: -1.5px;">/</span>
+          <span id="expDateYOutput">00</span>
+        </div>
       </>
     )
   }
