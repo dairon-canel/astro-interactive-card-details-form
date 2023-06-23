@@ -1,8 +1,58 @@
 ---
+const errors = {
+  ownerName: '',
+  cardNumber: '',
+  expDate: '',
+  cvcNumber: '',
+};
+
+const isValidCardNumber = (cardNumber: string) => {
+  return true;
+};
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const ownerName = data.get('ownerName');
+    const cardNumber = data.get('cardNumber');
+    const expDateM = data.get('expDateM');
+    const expDateY = data.get('expDateY');
+    const cvcNumber = data.get('cvcNumber');
+
+    console.log(ownerName);
+    console.log(cardNumber);
+    console.log(expDateM);
+    console.log(expDateY);
+    console.log(cvcNumber);
+
+    /* if (typeof ownerName !== 'string' || ownerName.length < 1) {
+      errors.ownerName += 'Please enter a card holder name. ';
+    }
+    if (typeof cardNumber !== 'string' || !isValidCardNumber(cardNumber)) {
+      errors.cardNumber += 'Card number is not valid. ';
+    }
+    if (typeof expDateM !== 'string' || expDateM.length < 6) {
+      errors.expDate += 'Password must be at least 6 characters. ';
+    }
+    if (typeof expDateY !== 'string' || expDateY.length < 6) {
+      errors.expDate += 'Password must be at least 6 characters. ';
+    }
+    if (typeof cvcNumber !== 'string' || cvcNumber.length < 6) {
+      errors.cvcNumber += 'Password must be at least 6 characters. ';
+    }
+    if (!Object.keys(errors).length) {
+      return Astro.redirect('/success');
+    } */
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
 
 <section class="form_section">
-  <form>
+  <form method="POST">
     <div>
       <label>
         Cardholder Name
@@ -13,6 +63,7 @@
           required
         />
       </label>
+      {errors.ownerName && <p>{errors.ownerName}</p>}
     </div>
     <div>
       <label>
@@ -25,6 +76,7 @@
           required
         />
       </label>
+      {errors.cardNumber && <p>{errors.cardNumber}</p>}
     </div>
     <div>
       <label>
@@ -32,14 +84,23 @@
         <input type="number" placeholder="MM" name="expDateM" required />
         <input type="number" placeholder="YY" name="expDateY" required />
       </label>
+      {errors.expDate && <p>{errors.expDate}</p>}
     </div>
     <div>
       <label>
         CVC
         <input type="number" placeholder="e.g. 123" name="cvcNumber" required />
       </label>
+      {errors.cvcNumber && <p>{errors.cvcNumber}</p>}
     </div>
 
-    <button type="submit">Confirm</button>
+    <button>Confirm</button>
   </form>
 </section>
+
+<style>
+  .form_section {
+    background-color: chocolate;
+    margin-top: 40px;
+  }
+</style>

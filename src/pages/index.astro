@@ -14,7 +14,7 @@ import Form from '../components/Form.astro';
   </main>
 </Layout>
 
-<script is:inline>
+<script>
   const inputField = document.getElementById('cardNumber');
 
   if (inputField) {
@@ -24,7 +24,7 @@ import Form from '../components/Form.astro';
   function validateAndUpdateDiv() {
     const outputDiv = document.getElementById('outputDiv');
 
-    const inputValue = inputField.value;
+    const inputValue = (inputField as HTMLInputElement).value;
 
     // Remove any non-digit characters from the input value
     const formattedValue = inputValue.replace(/\D/g, '');
@@ -36,10 +36,10 @@ import Form from '../components/Form.astro';
     const formattedOutput = paddedValue.replace(/(.{4})/g, '$1 ');
 
     if (inputValue.length > 16) {
-      inputField.value = inputValue.substring(0, 16);
+      (inputField as HTMLInputElement).value = inputValue.substring(0, 16);
       return;
     }
-    outputDiv.textContent = formattedOutput;
+    (outputDiv as HTMLDivElement).textContent = formattedOutput;
   }
 </script>
 
@@ -57,10 +57,5 @@ import Form from '../components/Form.astro';
   .card_section {
     display: flex;
     flex-direction: column;
-  }
-
-  .form_section {
-    background-color: chocolate;
-    margin-top: 40px;
   }
 </style>
