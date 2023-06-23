@@ -15,11 +15,15 @@ import Form from '../components/Form.astro';
 </Layout>
 
 <script>
+  const ownerNameInputField = document.getElementById('ownerName');
   const cardNumberInputField = document.getElementById('cardNumber');
   const expDateMInputField = document.getElementById('expDateM');
   const expDateYInputField = document.getElementById('expDateY');
   const cvcNumberInputField = document.getElementById('cvcNumber');
 
+  if (ownerNameInputField) {
+    ownerNameInputField.addEventListener('input', validateAndUpdateOwnerName);
+  }
   if (cardNumberInputField) {
     cardNumberInputField.addEventListener('input', validateAndUpdateCardNumber);
     cardNumberInputField.addEventListener('keydown', preventLetterE);
@@ -42,6 +46,19 @@ import Form from '../components/Form.astro';
     if (event.key === 'e') {
       event.preventDefault();
     }
+  }
+
+  function validateAndUpdateOwnerName() {
+    const ownerNameOutput = document.getElementById('ownerNameOutput');
+
+    const ownerNameInputValue = (ownerNameInputField as HTMLInputElement).value;
+
+    if (ownerNameInputValue.length > 32) {
+      (ownerNameInputField as HTMLInputElement).value =
+        ownerNameInputValue.substring(0, 32);
+      return;
+    }
+    (ownerNameOutput as HTMLDivElement).textContent = ownerNameInputValue;
   }
 
   function validateAndUpdateCardNumber() {
