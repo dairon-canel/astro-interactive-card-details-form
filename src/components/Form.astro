@@ -1,55 +1,17 @@
 ---
-const errors = {
-  ownerName: '',
-  cardNumber: '',
-  expDate: '',
-  cvcNumber: '',
-};
+let errors;
+let cardData;
 
-const isValidCardNumber = (cardNumber: string) => {
-  return true;
-};
+if (Astro.cookies.has('errors')) {
+  errors = Astro.cookies.get('errors').json();
 
-if (Astro.request.method === 'POST') {
-  try {
-    /* const ownerName = data.get('ownerName');
-    const cardNumber = data.get('cardNumber');
-    const expDateM = data.get('expDateM');
-    const expDateY = data.get('expDateY');
-    const cvcNumber = data.get('cvcNumber');
+  Astro.cookies.delete('errors');
+}
 
-    if (typeof ownerName !== 'string' || ownerName.length < 1) {
-      errors.ownerName += 'Please enter a card holder name. ';
-    }
-    if (typeof cardNumber !== 'string' || !isValidCardNumber(cardNumber)) {
-      errors.cardNumber += 'Card number is not valid. ';
-    }
-    if (typeof expDateM !== 'string') {
-      errors.expDate += 'Password must be at least 6 characters. ';
-    }
-    if (typeof expDateY !== 'string') {
-      errors.expDate += 'Password must be at least 6 characters. ';
-    }
-    if (typeof cvcNumber !== 'string') {
-      errors.cvcNumber += 'Password must be at least 6 characters. ';
-    }
-    if (!Object.values(errors).some(e => e !== '')) {
-      console.log('post');
-      Astro.cookies.set('cardData', {
-        ownerName,
-        cardNumber,
-        expDateM,
-        expDateY,
-        cvcNumber,
-      });
-      console.log('serverrrr');
-      return Astro.redirect('/success');
-    } */
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
+if (Astro.cookies.has('cardData')) {
+  cardData = Astro.cookies.get('cardData').json();
+
+  Astro.cookies.delete('cardData');
 }
 ---
 
@@ -63,10 +25,13 @@ if (Astro.request.method === 'POST') {
           name="ownerName"
           id="ownerName"
           placeholder="e.g. Jane Appleseed"
+          minlength="5"
+          maxlength="32"
           required
+          value={cardData?.ownerName ?? ''}
         />
       </label>
-      {errors.ownerName && <p>{errors.ownerName}</p>}
+      {errors?.ownerName && <p>{errors.ownerName}</p>}
     </div>
     <div>
       <label>
@@ -76,10 +41,13 @@ if (Astro.request.method === 'POST') {
           type="number"
           name="cardNumber"
           placeholder="e.g. 1234 5678 9123 0000"
+          minlength="16"
+          maxlength="16"
           required
+          value={cardData?.cardNumber ?? ''}
         />
       </label>
-      {errors.cardNumber && <p>{errors.cardNumber}</p>}
+      {errors?.cardNumber && <p>{errors.cardNumber}</p>}
     </div>
     <div>
       <label>
@@ -89,17 +57,23 @@ if (Astro.request.method === 'POST') {
           placeholder="MM"
           name="expDateM"
           id="expDateM"
+          minlength="2"
+          maxlength="2"
           required
+          value={cardData?.expDateM ?? ''}
         />
         <input
           type="number"
           placeholder="YY"
           name="expDateY"
+          minlength="2"
+          maxlength="2"
           id="expDateY"
           required
+          value={cardData?.expDateY ?? ''}
         />
       </label>
-      {errors.expDate && <p>{errors.expDate}</p>}
+      {errors?.expDate && <p>{errors.expDate}</p>}
     </div>
     <div>
       <label>
@@ -109,10 +83,13 @@ if (Astro.request.method === 'POST') {
           placeholder="e.g. 123"
           id="cvcNumber"
           name="cvcNumber"
+          minlength="3"
+          maxlength="3"
           required
+          value={cardData?.cvcNumber ?? ''}
         />
       </label>
-      {errors.cvcNumber && <p>{errors.cvcNumber}</p>}
+      {errors?.cvcNumber && <p>{errors.cvcNumber}</p>}
     </div>
 
     <button>Confirm</button>

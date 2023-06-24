@@ -1,20 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-let ownerName = '';
-let cardNumber = '';
-let expDateM = '';
-let expDateY = '';
-let cvcNumber = '';
+let cardData;
 
 if (Astro.cookies.has('cardData')) {
-  const cardData = Astro.cookies.get('cardData').json();
-
-  ownerName = cardData.ownerName;
-  cardNumber = cardData.cardNumber;
-  expDateM = cardData.expDateM;
-  expDateY = cardData.expDateY;
-  cvcNumber = cardData.cvcNumber;
+  cardData = Astro.cookies.get('cardData').json();
 
   Astro.cookies.delete('cardData');
 }
@@ -22,9 +12,9 @@ if (Astro.cookies.has('cardData')) {
 
 <Layout title="Frontend Mentor | Interactive card details form">
   success
-  <div>{ownerName}</div>
-  <div>{cardNumber}</div>
-  <div>{expDateM}</div>
-  <div>{expDateY}</div>
-  <div>{cvcNumber}</div>
+  <div>{cardData?.ownerName ?? ''}</div>
+  <div>{cardData?.cardNumber ?? ''}</div>
+  <div>{cardData?.expDateM ?? ''}</div>
+  <div>{cardData?.expDateY ?? ''}</div>
+  <div>{cardData?.cvcNumber ?? ''}</div>
 </Layout>
