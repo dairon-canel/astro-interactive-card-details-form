@@ -1,4 +1,5 @@
 ---
+import Input from './Input.astro';
 let errors;
 let cardData;
 
@@ -16,89 +17,115 @@ if (Astro.cookies.has('cardData')) {
 ---
 
 <section class="form_section">
-  <form action="/cardData" method="POST">
-    <div>
-      <label>
-        Cardholder Name
-        <input
-          type="text"
-          name="ownerName"
-          id="ownerName"
-          placeholder="e.g. Jane Appleseed"
-          minlength="5"
-          maxlength="32"
-          required
-          value={cardData?.ownerName ?? ''}
-        />
-      </label>
-      {errors?.ownerName && <p>{errors.ownerName}</p>}
-    </div>
-    <div>
-      <label>
-        Card Number
-        <input
-          id="cardNumber"
-          type="number"
-          name="cardNumber"
-          placeholder="e.g. 1234 5678 9123 0000"
-          minlength="16"
-          maxlength="16"
-          required
-          value={cardData?.cardNumber ?? ''}
-        />
-      </label>
-      {errors?.cardNumber && <p>{errors.cardNumber}</p>}
-    </div>
-    <div>
-      <label>
+  <form class="form_section__form" action="/cardData" method="POST">
+    <Input
+      value={cardData?.ownerName}
+      error={errors?.ownerName}
+      id="ownerName"
+      placeholder="e.g. Jane Appleseed"
+      label="Cardholder Name"
+      minLength={5}
+      maxLength={32}
+      required
+      type="text"
+      inputClass="input_owner_name"
+      inputStyle="grid-column: 1 / 3"
+    />
+    <Input
+      value={cardData?.cardNumber}
+      error={errors?.cardNumber}
+      id="cardNumber"
+      placeholder="e.g. 1234 5678 9123 0000"
+      label="Card Number"
+      minLength={16}
+      maxLength={16}
+      required
+      type="number"
+      inputClass="input_card_number"
+      inputStyle="grid-column: 1 / 3"
+    />
+    <div class="form_section__input_container exp_date_container">
+      <label class="input_label_exp_date">
         Exp. Date (MM/YY)
-        <input
-          type="number"
-          placeholder="MM"
-          name="expDateM"
-          id="expDateM"
-          minlength="2"
-          maxlength="2"
-          required
-          value={cardData?.expDateM ?? ''}
-        />
-        <input
-          type="number"
-          placeholder="YY"
-          name="expDateY"
-          minlength="2"
-          maxlength="2"
-          id="expDateY"
-          required
-          value={cardData?.expDateY ?? ''}
-        />
+        <div class="exp_date__inputs_container">
+          <input
+            class="form_section_input input_exp_date_m"
+            type="number"
+            placeholder="MM"
+            name="expDateM"
+            id="expDateM"
+            minlength="2"
+            maxlength="2"
+            required
+            value={cardData?.expDateM ?? ''}
+          />
+          <input
+            class="form_section_input input_exp_date_y"
+            type="number"
+            placeholder="YY"
+            name="expDateY"
+            minlength="2"
+            maxlength="2"
+            id="expDateY"
+            required
+            value={cardData?.expDateY ?? ''}
+          />
+        </div>
       </label>
-      {errors?.expDate && <p>{errors.expDate}</p>}
+      <!-- {errors?.expDate && <p class="error_container">{errors.expDate}</p>} -->
     </div>
-    <div>
-      <label>
-        CVC
-        <input
-          type="number"
-          placeholder="e.g. 123"
-          id="cvcNumber"
-          name="cvcNumber"
-          minlength="3"
-          maxlength="3"
-          required
-          value={cardData?.cvcNumber ?? ''}
-        />
-      </label>
-      {errors?.cvcNumber && <p>{errors.cvcNumber}</p>}
-    </div>
-
-    <button>Confirm</button>
+    <Input
+      value={cardData?.cvcNumber}
+      error={errors?.cvcNumber}
+      id="cvcNumber"
+      placeholder="e.g. 123"
+      label="CVC"
+      minLength={3}
+      maxLength={3}
+      required
+      type="number"
+      inputClass="input_cvc_number"
+      inputStyle="grid-column: 2 / 3"
+    />
+    <button class="form_button">Confirm</button>
   </form>
 </section>
 
 <style>
   .form_section {
-    background-color: chocolate;
-    margin-top: 40px;
+    display: grid;
+    place-self: center;
+    align-self: flex-start;
+  }
+
+  .form_section__form {
+    display: grid;
+    place-self: stretch;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .exp_date_container {
+    display: grid;
+  }
+
+  .input_label_exp_date {
+    display: flex;
+    flex-direction: column;
+    min-width: 30px;
+  }
+  .exp_date__inputs_container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .input_exp_date_m {
+    width: 70px;
+  }
+  .input_exp_date_y {
+    width: 70px;
+  }
+
+  .form_button {
+    grid-column: 1 / 3;
   }
 </style>
