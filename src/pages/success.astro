@@ -18,15 +18,14 @@ if (Astro.cookies.has('cardData')) {
 
 <Layout title="Frontend Mentor | Interactive card details form">
   <section class="card_section">
-    <Card display="back" align="end" style={{ marginBottom: '-60px' }} />
-    <Card display="front" align="start" />
+    <Card
+      display="back"
+      align="end"
+      style={{ marginBottom: '-60px' }}
+      cardData={cardData}
+    />
+    <Card display="front" align="start" cardData={cardData} />
   </section>
-  success
-  <div>{cardData?.ownerName ?? ''}</div>
-  <div>{cardData?.cardNumber ?? ''}</div>
-  <div>{cardData?.expDateM ?? ''}</div>
-  <div>{cardData?.expDateY ?? ''}</div>
-  <div>{cardData?.cvcNumber ?? ''}</div>
 </Layout>
 
 <style>

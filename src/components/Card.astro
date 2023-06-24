@@ -3,9 +3,16 @@ export interface Props {
   display: 'front' | 'back';
   align: 'start' | 'center' | 'end';
   style?: {};
+  cardData?: {
+    cardNumber: string;
+    ownerName: string;
+    expDateM: string;
+    expDateY: string;
+    cvcNumber: string;
+  };
 }
 
-const { display, align, style } = Astro.props;
+const { display, align, style, cardData } = Astro.props;
 ---
 
 <div
@@ -23,15 +30,16 @@ const { display, align, style } = Astro.props;
     display === 'front' && (
       <>
         <div class="card_front__number" id="cardNumberOutput">
-          0000 0000 0000 0000
+          {cardData?.cardNumber.replace(/(.{4})/g, '$1 ') ??
+            '0000 0000 0000 0000'}
         </div>
         <div class="card_front__owner" id="ownerNameOutput">
-          Jane Appleseed
+          {cardData?.ownerName ?? 'Jane Appleseed'}
         </div>
         <div class="card_front__date">
-          <span id="expDateMOutput">00</span>
+          <span id="expDateMOutput">{cardData?.expDateM ?? '00'}</span>
           <span style="margin-left: -2px; margin-right: -1.5px;">/</span>
-          <span id="expDateYOutput">00</span>
+          <span id="expDateYOutput">{cardData?.expDateY ?? '00'}</span>
         </div>
       </>
     )
@@ -39,7 +47,7 @@ const { display, align, style } = Astro.props;
   {
     display === 'back' && (
       <div class="card_back__cvc_number" id="cvcNumberOutput">
-        000
+        {cardData?.cvcNumber ?? '000'}
       </div>
     )
   }
