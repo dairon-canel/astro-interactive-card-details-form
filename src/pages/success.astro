@@ -1,16 +1,26 @@
 ---
+import Card from '../components/Card.astro';
 import Layout from '../layouts/Layout.astro';
 
 let cardData;
+
+if (!Astro.cookies.has('success')) {
+  return Astro.redirect('/');
+}
 
 if (Astro.cookies.has('cardData')) {
   cardData = Astro.cookies.get('cardData').json();
 
   Astro.cookies.delete('cardData');
+  Astro.cookies.delete('success');
 }
 ---
 
 <Layout title="Frontend Mentor | Interactive card details form">
+  <section class="card_section">
+    <Card display="back" align="end" style={{ marginBottom: '-60px' }} />
+    <Card display="front" align="start" />
+  </section>
   success
   <div>{cardData?.ownerName ?? ''}</div>
   <div>{cardData?.cardNumber ?? ''}</div>
@@ -18,3 +28,10 @@ if (Astro.cookies.has('cardData')) {
   <div>{cardData?.expDateY ?? ''}</div>
   <div>{cardData?.cvcNumber ?? ''}</div>
 </Layout>
+
+<style>
+  .card_section {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

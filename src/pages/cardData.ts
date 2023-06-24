@@ -10,6 +10,7 @@ export async function post({ request, cookies, redirect }: APIContext) {
     expDate: '',
     cvcNumber: '',
   };
+
   const formData = await request.formData();
 
   const ownerName = formData.get('ownerName');
@@ -66,5 +67,6 @@ export async function post({ request, cookies, redirect }: APIContext) {
     return redirect('/', 301);
   }
 
+  cookies.set('success', 'done');
   return redirect('/success', 301);
 }
