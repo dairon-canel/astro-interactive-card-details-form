@@ -7,7 +7,7 @@ import Form from '../components/Form.astro';
 <Layout title="Frontend Mentor | Interactive card details form">
   <h1 style="display: none;">Main Form</h1>
   <section class="card_section">
-    <Card display="back" align="end" style={{ marginBottom: '-60px' }} />
+    <Card display="back" align="end" />
     <Card display="front" align="start" />
   </section>
   <Form />
@@ -184,5 +184,13 @@ import Form from '../components/Form.astro';
   .card_section {
     display: flex;
     flex-direction: column;
+  }
+
+  @media screen and (min-width: 1000px) {
+    .card_section {
+      align-self: center;
+      margin-left: 148px;
+      margin-right: -85px;
+    }
   }
 </style>

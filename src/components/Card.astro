@@ -2,6 +2,7 @@
 export interface Props {
   display: 'front' | 'back';
   align: 'start' | 'center' | 'end';
+  classname?: string;
   style?: {};
   cardData?: {
     cardNumber: string;
@@ -12,12 +13,13 @@ export interface Props {
   };
 }
 
-const { display, align, style, cardData } = Astro.props;
+const { display, align, style, cardData, classname } = Astro.props;
 ---
 
 <div
   class:list={[
     `card card_${display}`,
+    classname,
     {
       align_start: align === 'start',
       align_center: align === 'center',
@@ -115,6 +117,7 @@ const { display, align, style, cardData } = Astro.props;
 
   .card_back {
     background-image: url('bg-card-back.png');
+    margin-bottom: -60px;
   }
 
   .card_back__cvc_number {
@@ -132,5 +135,62 @@ const { display, align, style, cardData } = Astro.props;
   }
   .align_end {
     align-self: end;
+  }
+
+  @media screen and (min-width: 1000px) {
+    .card {
+      height: 245px;
+      width: 447px;
+    }
+
+    .card_back {
+      order: 2;
+      margin-bottom: 0px;
+    }
+
+    .card_front {
+      order: 1;
+      margin-top: -45px;
+      margin-bottom: 36px;
+    }
+
+    .card_front::after {
+      width: 48px;
+      height: 48px;
+      left: 33px;
+      top: 28px;
+    }
+
+    .card_front::before {
+      width: 24px;
+      height: 24px;
+      left: 95px;
+      top: 40px;
+    }
+
+    .card_front__date {
+      right: 33px;
+      top: 198px;
+      font-size: medium;
+    }
+
+    .card_front__number {
+      left: 31px;
+      top: 135px;
+      font-size: 30px;
+    }
+
+    .card_front__owner {
+      left: 31px;
+      top: 200px;
+      font-size: medium;
+      letter-spacing: 0.6px;
+    }
+
+    .card_back__cvc_number {
+      right: 60px;
+      top: 108px;
+      font-size: medium;
+    }
   }
 </style>
