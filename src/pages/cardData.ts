@@ -55,10 +55,10 @@ export async function post({ request, cookies, redirect }: APIContext) {
     errors.expDate += 'Year must have 2 chars. \n';
   }
   if (typeof cvcNumber !== 'string') {
-    errors.cvcNumber += 'Password must be at least 6 characters. ';
+    errors.cvcNumber += 'CVC must be a string. \n';
   }
   if ((cvcNumber as string).length !== 3) {
-    errors.cvcNumber += 'Year must have 3 chars. \n';
+    errors.cvcNumber += 'CVC must have 3 chars. \n';
   }
 
   if (Object.values(errors).some(e => e !== '')) {
@@ -68,5 +68,5 @@ export async function post({ request, cookies, redirect }: APIContext) {
   }
 
   cookies.set('success', 'done');
-  return redirect('/success', 301);
+  return redirect('/thank-you', 301);
 }

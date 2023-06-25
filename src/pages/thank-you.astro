@@ -1,0 +1,73 @@
+---
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import Layout from '../layouts/Layout.astro';
+
+let cardData;
+
+if (!Astro.cookies.has('success')) {
+  return Astro.redirect('/');
+}
+
+if (Astro.cookies.has('cardData')) {
+  cardData = Astro.cookies.get('cardData').json();
+
+  Astro.cookies.delete('cardData');
+  Astro.cookies.delete('success');
+  Astro.cookies.delete('errors');
+}
+---
+
+<Layout title="Frontend Mentor | Interactive card details form">
+  <section class="card_section">
+    <Card
+      display="back"
+      align="end"
+      style={{ marginBottom: '-60px' }}
+      cardData={cardData}
+    />
+    <Card display="front" align="start" cardData={cardData} />
+  </section>
+  <section class="thank_you_section">
+    <h1 class="thank_you_section__title">Thank you!</h1>
+    <p class="thank_you_section__description">We've added your card details</p>
+    <Button
+      style="margin-top: 45px; align-self: stretch;"
+      label="Continue"
+      href="/"
+    />
+  </section>
+</Layout>
+
+<style>
+  .card_section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thank_you_section {
+    background-image: url('icon-complete.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin-top: 48px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .thank_you_section__title {
+    padding-top: 113px;
+    text-transform: uppercase;
+    font-weight: normal;
+    letter-spacing: 4px;
+    color: var(--very-dark-violet);
+  }
+
+  .thank_you_section__description {
+    margin-top: 12px;
+    letter-spacing: 0.1px;
+    color: var(--dark-grayish-violet);
+  }
+</style>

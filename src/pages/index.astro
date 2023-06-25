@@ -5,6 +5,7 @@ import Form from '../components/Form.astro';
 ---
 
 <Layout title="Frontend Mentor | Interactive card details form">
+  <h1 style="display: none;">Main Form</h1>
   <section class="card_section">
     <Card display="back" align="end" style={{ marginBottom: '-60px' }} />
     <Card display="front" align="start" />
@@ -21,22 +22,23 @@ import Form from '../components/Form.astro';
 
   if (ownerNameInputField) {
     ownerNameInputField.addEventListener('input', validateAndUpdateOwnerName);
+    ownerNameInputField.addEventListener('keydown', preventNumbers);
   }
   if (cardNumberInputField) {
     cardNumberInputField.addEventListener('input', validateAndUpdateCardNumber);
-    cardNumberInputField.addEventListener('keydown', preventLetterE);
+    cardNumberInputField.addEventListener('keydown', preventLetters);
   }
   if (expDateMInputField) {
     expDateMInputField.addEventListener('input', validateAndUpdateExpDateM);
-    expDateMInputField.addEventListener('keydown', preventLetterE);
+    expDateMInputField.addEventListener('keydown', preventLetters);
   }
   if (expDateYInputField) {
     expDateYInputField.addEventListener('input', validateAndUpdateExpDateY);
-    expDateYInputField.addEventListener('keydown', preventLetterE);
+    expDateYInputField.addEventListener('keydown', preventLetters);
   }
   if (cvcNumberInputField) {
     cvcNumberInputField.addEventListener('input', validateAndUpdateCvcNumber);
-    cvcNumberInputField.addEventListener('keydown', preventLetterE);
+    cvcNumberInputField.addEventListener('keydown', preventLetters);
   }
 
   function cc_format(value: string) {
@@ -56,9 +58,13 @@ import Form from '../components/Form.astro';
     }
   }
 
-  function preventLetterE(event: KeyboardEvent) {
-    // Prevent default behavior if the pressed key is "e"
-    if (event.key === 'e') {
+  function preventLetters(event: KeyboardEvent) {
+    if (event.key.match(/^[a-z]$/)) {
+      event.preventDefault();
+    }
+  }
+  function preventNumbers(event: KeyboardEvent) {
+    if (event.key.match(/^[0-9]$/)) {
       event.preventDefault();
     }
   }
@@ -96,11 +102,8 @@ import Form from '../components/Form.astro';
 
     const expDateMInputValue = (expDateMInputField as HTMLInputElement).value;
 
-    // Remove any non-digit characters from the input value
-    const expDateMFormattedValue = expDateMInputValue.replace(/\De/g, '');
-
     // Pad the formatted value with zeros to make it 2 characters long
-    let expDateMPaddedValue = expDateMFormattedValue.padStart(2, '0');
+    let expDateMPaddedValue = expDateMInputValue.padStart(2, '0');
 
     if (expDateMInputValue == '012') {
       (expDateMInputField as HTMLInputElement).value = '12';
@@ -120,7 +123,7 @@ import Form from '../components/Form.astro';
 
     if (expDateMInputValue.match(/^[1-9]$/)) {
       (expDateMInputField as HTMLInputElement).value =
-        expDateMFormattedValue.padStart(2, '0');
+        expDateMInputValue.padStart(2, '0');
     }
     if (expDateMInputValue.length > 2) {
       (expDateMInputField as HTMLInputElement).value =
@@ -136,15 +139,12 @@ import Form from '../components/Form.astro';
 
     const expDateYInputValue = (expDateYInputField as HTMLInputElement).value;
 
-    // Remove any non-digit characters from the input value
-    const expDateYFormattedValue = expDateYInputValue.replace(/\D/g, '');
-
     // Pad the formatted value with zeros to make it 2 characters long
-    let expDateYPaddedValue = expDateYFormattedValue.padStart(2, '0');
+    let expDateYPaddedValue = expDateYInputValue.padStart(2, '0');
 
     if (expDateYInputValue.match(/^[1-9]$/)) {
       (expDateYInputField as HTMLInputElement).value =
-        expDateYFormattedValue.padStart(2, '0');
+        expDateYInputValue.padStart(2, '0');
     }
 
     if (expDateYInputValue.match(/^0[1-9][0-9]$/)) {
@@ -167,11 +167,8 @@ import Form from '../components/Form.astro';
 
     const cvcNumberInputValue = (cvcNumberInputField as HTMLInputElement).value;
 
-    // Remove any non-digit characters from the input value
-    const cvcNumberFormattedValue = cvcNumberInputValue.replace(/\De/g, '');
-
     // Pad the formatted value with zeros to make it 2 characters long
-    let cvcNumberPaddedValue = cvcNumberFormattedValue.padStart(3, '0');
+    let cvcNumberPaddedValue = cvcNumberInputValue.padStart(3, '0');
 
     if (cvcNumberInputValue.length > 3) {
       (cvcNumberInputField as HTMLInputElement).value =

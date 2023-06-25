@@ -1,0 +1,27 @@
+---
+export interface Props {
+  label: string;
+  style: string;
+  href?: string;
+}
+
+const { label, style, href } = Astro.props;
+
+const Element = href ? 'a' : 'button';
+---
+
+<Element class="custom_button" style={style} href={href}>{label}</Element>
+
+<style>
+  .custom_button {
+    display: flex;
+    height: 53px;
+    border-radius: 7px;
+    border: none;
+    color: var(--light-grayish-violet);
+    background-color: var(--very-dark-violet);
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+</style>
