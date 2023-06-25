@@ -44,7 +44,7 @@ if (Astro.cookies.has('cardData')) {
       inputClass="input_card_number"
       inputStyle="grid-column: 1 / 3"
     />
-    <div class="form_section__input_container exp_date_container">
+    <div class="exp_date_container">
       <label class="input_label_exp_date">
         Exp. Date (MM/YY)
         <div class="exp_date__inputs_container">
@@ -109,26 +109,56 @@ if (Astro.cookies.has('cardData')) {
 
   .exp_date_container {
     display: grid;
+    grid-column: 1 / 2;
   }
 
   .input_label_exp_date {
     display: flex;
     flex-direction: column;
     min-width: 30px;
+    text-transform: uppercase;
+    font-size: small;
+    letter-spacing: 1.3px;
+    font-weight: bolder;
+    color: var(--very-dark-violet);
+    margin-bottom: 20px;
   }
   .exp_date__inputs_container {
     display: flex;
     flex-direction: row;
   }
 
+  .form_section_input {
+    margin-top: 6px;
+    padding-top: 3px;
+    padding-left: 15px;
+    letter-spacing: 1.1px;
+    height: 44px;
+    border-radius: 7px;
+    border: 1px solid var(--dark-grayish-violet);
+    opacity: 50%;
+    font-size: medium;
+    font-weight: normal;
+  }
+  .form_section_input::placeholder {
+    color: var(--dark-grayish-violet);
+  }
+
   .input_exp_date_m {
-    width: 70px;
+    width: 71px;
+    margin-right: 10px;
   }
   .input_exp_date_y {
-    width: 70px;
+    width: 71px;
   }
 
   .form_button {
     grid-column: 1 / 3;
+    margin-top: 8px;
+    height: 53px;
+    border-radius: 7px;
+    border: none;
+    color: var(--light-grayish-violet);
+    background-color: var(--very-dark-violet);
   }
 </style>

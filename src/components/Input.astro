@@ -33,7 +33,11 @@ const {
   <label class="input_label">
     {label}
     <input
-      class:list={['form_section_input', inputClass]}
+      class:list={[
+        'form_section_input',
+        { form_section_input_error: error },
+        inputClass,
+      ]}
       type={type}
       name={id}
       id={id}
@@ -71,12 +75,28 @@ const {
     letter-spacing: 1.1px;
     height: 44px;
     border-radius: 7px;
-    border: 1px solid var(--dark-grayish-violet);
-    opacity: 70%;
+    border: 2px solid var(--dark-grayish-violet);
+    opacity: 50%;
     font-size: medium;
     font-weight: normal;
   }
   .form_section_input::placeholder {
     color: var(--dark-grayish-violet);
+  }
+  .form_section_input:focus,
+  .form_section_input:focus-visible,
+  .form_section_input:focus-within {
+    outline: none !important;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    background-image: linear-gradient(white, white), var(--linear-gradient);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 0 10px var(--dark-grayish-violet);
+  }
+
+  .form_section_input_error {
+    outline: none !important;
+    border: 2px solid var(--errors);
   }
 </style>

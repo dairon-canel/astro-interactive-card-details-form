@@ -96,7 +96,11 @@ const { title } = Astro.props;
 
   :root {
     --accent: 124, 58, 237;
-    --linear-gradient: linear-gradient(hsl(249, 99%, 64%), hsl(278, 94%, 30%));
+    --linear-gradient: linear-gradient(
+      to right,
+      hsl(249, 99%, 64%),
+      hsl(278, 94%, 30%)
+    );
     --errors: hsl(0, 100%, 66%);
     --light-grayish-violet: hsl(270, 3%, 87%);
     --dark-grayish-violet: hsl(279, 6%, 55%);
@@ -106,6 +110,7 @@ const { title } = Astro.props;
     background-color: #f6f6f6;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.125rem;
+    transition: all ease 0.3s;
   }
 
   main {
