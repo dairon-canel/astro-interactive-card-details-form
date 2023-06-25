@@ -56,6 +56,12 @@ import Form from '../components/Form.astro';
         ownerNameInputValue.substring(0, 32);
       return;
     }
+
+    if (ownerNameInputValue.length == 0) {
+      (ownerNameOutput as HTMLDivElement).textContent = 'Jane Appleseed';
+      return;
+    }
+
     (ownerNameOutput as HTMLDivElement).textContent = ownerNameInputValue;
   }
 
