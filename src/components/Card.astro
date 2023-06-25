@@ -30,8 +30,7 @@ const { display, align, style, cardData } = Astro.props;
     display === 'front' && (
       <>
         <div class="card_front__number" id="cardNumberOutput">
-          {cardData?.cardNumber.replace(/(.{4})/g, '$1 ') ??
-            '0000 0000 0000 0000'}
+          {cardData?.cardNumber ?? '0000 0000 0000 0000'}
         </div>
         <div class="card_front__owner" id="ownerNameOutput">
           {cardData?.ownerName ?? 'Jane Appleseed'}

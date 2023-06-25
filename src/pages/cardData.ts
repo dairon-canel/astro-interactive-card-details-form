@@ -36,7 +36,7 @@ export async function post({ request, cookies, redirect }: APIContext) {
   if (typeof cardNumber !== 'string') {
     errors.cardNumber += 'Card number is not valid. \n';
   }
-  if ((cardNumber as string).length !== 16) {
+  if ((cardNumber as string).replaceAll(' ', '').length !== 16) {
     errors.cardNumber += 'Card number must have 16 chars. \n';
   }
   if (typeof expDateM !== 'string') {

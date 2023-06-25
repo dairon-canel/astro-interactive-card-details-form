@@ -49,7 +49,7 @@ const {
       value={value ?? ''}
     />
   </label>
-  {error && <p class="error_container">{error}</p>}
+  <p class="error_container">{error ?? ' '}</p>
 </div>
 
 <style>
@@ -66,7 +66,6 @@ const {
     letter-spacing: 1.3px;
     font-weight: bolder;
     color: var(--very-dark-violet);
-    margin-bottom: 20px;
   }
   .form_section_input {
     margin-top: 6px;
@@ -98,5 +97,14 @@ const {
   .form_section_input_error {
     outline: none !important;
     border: 2px solid var(--errors);
+  }
+
+  .error_container {
+    margin-bottom: 20px;
+    font-size: small;
+    letter-spacing: 1.3px;
+    font-weight: bolder;
+    color: var(--errors);
+    opacity: 85%;
   }
 </style>
