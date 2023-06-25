@@ -107,7 +107,7 @@ const { title } = Astro.props;
     --very-dark-violet: hsl(278, 68%, 11%);
   }
   html {
-    background-color: #f6f6f6;
+    background-color: white;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.125rem;
     transition: all ease 0.3s;
@@ -127,7 +127,12 @@ const { title } = Astro.props;
     max-width: 1900px;
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 500px) {
+    main {
+      background-size: 1200px 320px;
+    }
+  }
+  @media screen and (min-width: 1200px) {
     main {
       grid-template-columns: 0.75fr 1fr;
       background-image: url('bg-main-desktop.png');
