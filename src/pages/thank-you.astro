@@ -20,12 +20,7 @@ if (Astro.cookies.has('cardData')) {
 
 <Layout title="Frontend Mentor | Interactive card details form">
   <section class="card_section">
-    <Card
-      display="back"
-      align="end"
-      style={{ marginBottom: '-60px' }}
-      cardData={cardData}
-    />
+    <Card display="back" align="end" cardData={cardData} />
     <Card display="front" align="start" cardData={cardData} />
   </section>
   <section class="thank_you_section">
@@ -43,6 +38,8 @@ if (Astro.cookies.has('cardData')) {
   .card_section {
     display: flex;
     flex-direction: column;
+    max-width: 415px;
+    place-self: center top;
   }
 
   .thank_you_section {
@@ -55,6 +52,8 @@ if (Astro.cookies.has('cardData')) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-self: center;
+    max-width: 415px;
   }
 
   .thank_you_section__title {
@@ -69,5 +68,34 @@ if (Astro.cookies.has('cardData')) {
     margin-top: 12px;
     letter-spacing: 0.1px;
     color: var(--dark-grayish-violet);
+  }
+
+  @media screen and (min-width: 500px) {
+    .card_section {
+      margin-left: 10%;
+    }
+  }
+  @media screen and (min-width: 760px) {
+    .card_section {
+      margin-left: 20%;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .card_section {
+      margin-left: 30%;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .card_section {
+      margin-left: 148px;
+      margin-right: -85px;
+      max-width: 700px;
+      place-self: center stretch;
+    }
+
+    .thank_you_section {
+      align-self: center;
+      width: 396px;
+    }
   }
 </style>
