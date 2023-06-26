@@ -54,8 +54,6 @@ if (Astro.cookies.has('cardData')) {
           placeholder="MM"
           name="expDateM"
           id="expDateM"
-          minlength="2"
-          maxlength="2"
           required
           value={cardData?.expDateM ?? ''}
         />
@@ -64,8 +62,6 @@ if (Astro.cookies.has('cardData')) {
           type="number"
           placeholder="YY"
           name="expDateY"
-          minlength="2"
-          maxlength="2"
           id="expDateY"
           required
           value={cardData?.expDateY ?? ''}
@@ -79,8 +75,6 @@ if (Astro.cookies.has('cardData')) {
       id="cvcNumber"
       placeholder="e.g. 123"
       label="CVC"
-      minLength={3}
-      maxLength={3}
       required
       type="number"
       inputClass="input_cvc_number"
