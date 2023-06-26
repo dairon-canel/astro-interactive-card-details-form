@@ -34,6 +34,14 @@ if (Astro.cookies.has('cardData')) {
   </section>
 </Layout>
 
+<script>
+  import JSConfetti from 'js-confetti';
+
+  const jsConfetti = new JSConfetti();
+
+  jsConfetti.addConfetti();
+</script>
+
 <style>
   .card_section {
     display: flex;
