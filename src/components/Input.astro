@@ -42,8 +42,8 @@ const {
       name={id}
       id={id}
       placeholder={placeholder}
-      minlength={`${minLength}`}
-      maxlength={`${maxLength}`}
+      minlength={minLength ?? ''}
+      maxlength={maxLength ?? ''}
       required={required ?? false}
       autocomplete="off"
       value={value ?? ''}
