@@ -46,34 +46,32 @@ if (Astro.cookies.has('cardData')) {
       inputStyle="grid-column: 1 / 3"
     />
     <div class="exp_date_container">
-      <label class="input_label_exp_date">
-        Exp. Date (MM/YY)
-        <div class="exp_date__inputs_container">
-          <input
-            class="form_section_input input_exp_date_m"
-            type="number"
-            placeholder="MM"
-            name="expDateM"
-            id="expDateM"
-            minlength="2"
-            maxlength="2"
-            required
-            value={cardData?.expDateM ?? ''}
-          />
-          <input
-            class="form_section_input input_exp_date_y"
-            type="number"
-            placeholder="YY"
-            name="expDateY"
-            minlength="2"
-            maxlength="2"
-            id="expDateY"
-            required
-            value={cardData?.expDateY ?? ''}
-          />
-        </div>
-        <p class="error_container">{errors?.expDate ?? ' '}</p>
-      </label>
+      <label class="input_label_exp_date"> Exp. Date (MM/YY)</label>
+      <div class="exp_date__inputs_container">
+        <input
+          class="form_section_input input_exp_date_m"
+          type="number"
+          placeholder="MM"
+          name="expDateM"
+          id="expDateM"
+          minlength="2"
+          maxlength="2"
+          required
+          value={cardData?.expDateM ?? ''}
+        />
+        <input
+          class="form_section_input input_exp_date_y"
+          type="number"
+          placeholder="YY"
+          name="expDateY"
+          minlength="2"
+          maxlength="2"
+          id="expDateY"
+          required
+          value={cardData?.expDateY ?? ''}
+        />
+      </div>
+      <p class="error_container">{errors?.expDate ?? ' '}</p>
     </div>
     <Input
       value={cardData?.cvcNumber}
@@ -125,7 +123,6 @@ if (Astro.cookies.has('cardData')) {
     letter-spacing: 1.3px;
     font-weight: bolder;
     color: var(--very-dark-violet);
-    margin-bottom: 20px;
   }
   .exp_date__inputs_container {
     display: flex;
