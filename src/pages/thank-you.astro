@@ -19,6 +19,9 @@ if (Astro.cookies.has('cardData')) {
 ---
 
 <Layout title="Frontend Mentor | Interactive card details form">
+  <h1 style="font-size: 0; line-height: 0; visibility: hidden;">
+    Thank You Page
+  </h1>
   <div class="card_section">
     <Card display="back" align="end" cardData={cardData} />
     <Card display="front" align="start" cardData={cardData} />
