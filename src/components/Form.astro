@@ -17,7 +17,7 @@ if (Astro.cookies.has('cardData')) {
 }
 ---
 
-<section class="form_section">
+<div class="form_section">
   <form class="form_section__form" action="/cardData" method="POST">
     <Input
       value={cardData?.ownerName}
@@ -93,7 +93,7 @@ if (Astro.cookies.has('cardData')) {
       label="Confirm"
     />
   </form>
-</section>
+</div>
 
 <style>
   .form_section {

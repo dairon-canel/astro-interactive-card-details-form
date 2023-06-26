@@ -19,12 +19,13 @@ if (Astro.cookies.has('cardData')) {
 ---
 
 <Layout title="Frontend Mentor | Interactive card details form">
-  <section class="card_section">
+  <h1 style="display: none;">Thank you page</h1>
+  <div class="card_section">
     <Card display="back" align="end" cardData={cardData} />
     <Card display="front" align="start" cardData={cardData} />
-  </section>
+  </div>
   <section class="thank_you_section">
-    <h1 class="thank_you_section__title">Thank you!</h1>
+    <h2 class="thank_you_section__title">Thank you!</h2>
     <p class="thank_you_section__description">We've added your card details</p>
     <Button
       style="margin-top: 45px; align-self: stretch;"

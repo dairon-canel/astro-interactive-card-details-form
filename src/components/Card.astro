@@ -58,11 +58,15 @@ const { display, align, style, cardData, classname } = Astro.props;
   .card {
     position: relative;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: top;
     color: var(--light-grayish-violet);
+    border-radius: 12px;
     width: 285px;
     height: 156px;
+    -webkit-box-shadow: 0px 0px 40px -15px var(--very-dark-violet);
+    -moz-box-shadow: 0px 0px 40px -15px var(--very-dark-violet);
+    box-shadow: 0px 0px 40px -15px var(--very-dark-violet);
   }
   .card_front {
     background-image: url(/images/bg-card-front.png);
